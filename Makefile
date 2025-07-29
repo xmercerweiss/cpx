@@ -5,8 +5,8 @@ BDIR := build
 
 CPXPATH := $(SDIR)/cpx.c
 DCPXPATH := $(SDIR)/dcpx.c
-CPXOUTPUT := cpx.bin
-DCPXOUTPUT := dcpx.bin
+CPXOUT := cpx.bin
+DCPXOUT := dcpx.bin
 MPATH := $(CPXPATH) $(DCPXPATH)
 
 UPATH := unity/unity.c
@@ -16,15 +16,15 @@ CC := gcc
 CFLAGS := -Iinclude -I.
 CFILES := $(filter-out $(MPATH), $(wildcard $(SDIR)/*.c))
 
-all: cpx dcpx
+all: cpx 
 
 cpx: $(CPXPATH) $(CFILES)
 	@mkdir -p $(BDIR)
-	$(CC) $(CFLAGS) $^ -o $(BDIR)/$(OUTPUT)
+	$(CC) $(CFLAGS) $^ -o $(BDIR)/$(CPXOUT)
 
 dcpx: $(DCPXPATH) $(CFILES)
 	@mkdir -p $(BDIR)
-	$(CC) $(CFLAGS) $^ -o $(BDIR)/$(OUTPUT)
+	$(CC) $(CFLAGS) $^ -o $(BDIR)/$(DCPXOUT)
 
 test: testcompile
 	@for testbin in $(BDIR)/$(TPREF)*.bin; do \
